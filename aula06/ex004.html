@@ -11,13 +11,12 @@
 
     </style>
 </head>
-<body>
-    
+<body> 
     <script>
         var nome =  window.prompt('Qual é o seu nome?')
         document.write(`Olá <strong>${nome}</strong> seu nome tem ${nome.length} letras. </br>`) // Vai mostrar quantas letras tem o nome.
-        document.write(`Seu nome em maiúsculas é <strong>${nome.toLocaleUpperCase()}</strong>. </br>`) // Vai mostrar o nome em maiúsculas.
-        document.write(`Seu nome em minúsculas é <strong>${nome.toLocaleLowerCase()}</strong>.`) // Vai mostrar o nome em minúsculas.
+        document.write(`Seu nome em maiúsculas é <strong>${nome.toUpperCase()}</strong>. </br>`) // Vai mostrar o nome em maiúsculas.
+        document.write(`Seu nome em minúsculas é <strong>${nome.toLowerCase()}</strong>.`) // Vai mostrar o nome em minúsculas.
     </script>
 </body>
 </html>
