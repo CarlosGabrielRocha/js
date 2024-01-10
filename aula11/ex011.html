@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de condição composta</title>
+</head>
+<body>
+    <h1>Teste de condição composta</h1>
+    <form action="" method="get">
+        <p>
+            <label for="ipais">Em que país você mora?</label>
+            <input type="text" name="pais" id="ipais">
+            <input type="button" value="Enviar" onclick="nacionalidade()">
+        </p>
+    </form>
+        <div id="res">
+            ...
+        </div>
+    <script>
+        function nacionalidade() {
+            var pais = window.document.querySelector('input#ipais')
+            var res = window.document.querySelector('div#res')
+            res.innerHTML = `Vivendo em ${pais.value}. <br>` 
+            if (pais.value == 'Brasil') {
+                res.innerHTML += `<p>Você é <strong>Brasileiro</strong>.</p>`
+            } else {
+                res.innerHTML += `<p>Você é <strong>Estrangeiro</strong>.</p>`
+            }
+        }
+    </script>
+</body>
+</html>
