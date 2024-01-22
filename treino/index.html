@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>teste</title>
+    <style>
+        img {
+            width: 80px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Testando meus conhecimentos</h1>
+    <div id="pasta"><a href=""><img onclick="abrir()" src="pasta.png" alt="pasta"></a></div>
+    
+    <script>
+        function abrir() {
+            var frame = document.createElement("iframe")
+            frame.setAttribute("src", "documento.html")
+            document.getElementById('pasta').appendChild(frame)
+           
+        }
+    </script>
+</body>
+</html>
