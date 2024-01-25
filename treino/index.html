@@ -12,14 +12,14 @@
 </head>
 <body>
     <h1>Testando meus conhecimentos</h1>
-    <div id="pasta"><a href=""><img onclick="abrir()" src="pasta.png" alt="pasta"></a></div>
+    <div id="pasta"><a href="documento.html" target="frame"><img onclick="abrir()" src="pasta.png" alt="pasta"></a></div>
     
     <script>
         function abrir() {
             var frame = document.createElement("iframe")
             frame.setAttribute("src", "documento.html")
-            document.getElementById('pasta').appendChild(frame)
-           
+            frame.setAttribute("name", "frame")
+            document.getElementById('pasta').appendChild(frame) 
         }
     </script>
 </body>
