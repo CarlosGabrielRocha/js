@@ -6,20 +6,62 @@
     <title>teste</title>
     <style>
         img {
-            width: 80px;
+            width: 50px;
+        }
+        img#item {
+            width: 200px;
+            padding: 20px;
+            display: none;
+        }
+        div#arquivo {
+            width: 250px;
+            height: 250px;
+            background-color: rgb(37, 37, 37);
+            border-radius: 10px;
+        }
+        form {
+            display: none;
+            color: white;
+            padding: 20px;
+        }
+        input#senha {
+            width: 100px;
+            height: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Testando meus conhecimentos</h1>
-    <div id="pasta"><a href="documento.html" target="frame"><img onclick="abrir()" src="pasta.png" alt="pasta"></a></div>
+    <div id="pasta">
+         <img onclick="abrir()" src="pasta.png" alt="pasta">
+    </div>
+         <div id="arquivo">
+            <form id="form" action="" method="post">
+                <label for="senha">Senha:</label>
+                <input type="password" name="senha" id="senha">
+                <input type="button" value="Enviar" onclick="enviou()">
+            </form>
+            <img id="item" src="boneca.jpg" alt="boneca">
+        </div>
+    
     
     <script>
         function abrir() {
-            var frame = document.createElement("iframe")
-            frame.setAttribute("src", "documento.html")
-            frame.setAttribute("name", "frame")
-            document.getElementById('pasta').appendChild(frame) 
+            if (form.style.display == 'none' ) {
+                form.style.display = 'block'
+                
+            } else {
+                form.style.display = 'none'
+                item.style.display = 'none'
+            }
+           
+        }
+        function enviou() {
+            var senha = window.document.querySelector('input#senha')
+                var verify = senha.value
+                if (verify == '123') {
+                    item.style.display = 'block'
+                }
         }
     </script>
 </body>
