@@ -5,27 +5,34 @@ function contar() {
     let pas = document.getElementById('ipasso')
     let res = document.getElementById('res')
 
-    if (ini.value.length == 0 || fim.value.length == 0 || pas.value.length == 0) {
-        window.alert('[ERRO] Faltam dados!')
+    if (ini.value.length == 0 || fim.value.length == 0) {
+        res.innerHTML = 'Impossível contar!'
     } else {
-        res.innerHTML = 'contando..'
-        let i = ini.value
-        let f = fim.value
-        let p = pas.value
+        let i = Number(ini.value)
+        let f = Number(fim.value)
+        let p = Number(pas.value)
 
-        for(let c = i;c <= fim; c += pas) {
-            res.innerHTML += `${c}`
+        if(p <= 0) {
+            window.alert('Passo inválido, considerando PASSO 1')
+            p = 1
         }
-    
-    }
 
- 
-    /*
-    while (ini <= fim) {
-        cont.innerHTML += `${num}`
-        ini = ini += pas
+        res.innerHTML = 'contando.. <br> '
+        // Contagem crescente
+        if(i < f) {
+            for(let c = i; c <= f; c += p) {
+                res.innerHTML += `\u{1F449}${c} `
+            }
+        } else {
+        // Contagem regressiva
+            for(c = i; c >= f; c -= p) {
+                res.innerHTML += `${c} `
+            }
+        }
+        res.innerHTML += `\u{1F3F4}`
+        
     }
-    */
+        
 }
 
 
