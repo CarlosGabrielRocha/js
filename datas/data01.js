@@ -1,10 +1,27 @@
-const data = new Date() // Data é o objeto base para manipulação de datas em JS.
+const data = new Date() 
 
 const div_data = document.getElementById("div_data")
+const div_relogio = document.getElementById("div_relogio")
 
-const data_r = data.getDate()+"/"+data.getMonth()+"/"+data.getFullYear()
-
+let dia = data.getDate()
+dia=dia<10?"0"+dia:dia
+let mes = data.getMonth()
+mes=mes<10?"0"+mes:mes
+const data_r = dia+"/"+mes+"/"+data.getFullYear()
 div_data.innerHTML=data_r
+
+const relogio=()=>{
+    const data = new Date()
+    let hora = data.getHours()
+    hora=hora<10?"0"+hora:hora
+    let min = data.getMinutes()
+    min=min<10?"0"+min:min
+    let seg = data.getSeconds()
+    seg=seg<10?"0"+seg:seg
+    div_relogio.innerHTML = `${hora}:${min}:${seg}`
+}
+
+const intervalo = setInterval(relogio, 1000)
 
 
 
