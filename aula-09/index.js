@@ -1,0 +1,1 @@
+window.alert("Viva a Cristo rei.")
