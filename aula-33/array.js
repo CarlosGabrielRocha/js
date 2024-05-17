@@ -36,3 +36,28 @@ console.log(ultimoElemento)
 let primeiroElemento = arr.shift()
 console.log(arr)
 console.log(ultimoElemento)
+
+// Pesquisar por um elemento
+/* includes (Verifica se um valor existe dentro do array) 
+  Retorna um valor do tipo boolean (true/false), que pode ser passado
+  para uma variável, caso seja necessário.
+*/
+
+const inclui = arr.includes("Gandalf")
+console.log(inclui)
+
+/* indexOf (Verifica o indice de um valor.) 
+*/
+
+const indice = arr.indexOf("Gandalf")
+console.log(indice)
+
+//Cortar e concatenar
+/* slice 
+*/
+
+const hobbits = arr.slice(0, 4)
+const outros = arr.slice(-4)
+console.log(arr)
+console.log(hobbits)
+console.log(outros)
