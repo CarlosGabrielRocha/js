@@ -61,3 +61,24 @@ const outros = arr.slice(-4)
 console.log(arr)
 console.log(hobbits)
 console.log(outros)
+
+//concat ( É possível concatenar vários arrays junto com outros valores e armazenar em uma var)
+
+const sociedade = hobbits.concat(outros, "Boromir")
+console.log(sociedade)
+
+//Substituição de Elementos
+/* splice
+  Retorna o elemento substituido que pode ser armazenado em uma variável.
+*/
+
+const elementosRemovidos = sociedade.splice(indice, 1, "Gandalf, o Cinzento", 1, 3, false, true)
+console.log(sociedade)
+console.log(elementosRemovidos)
+
+//Iterar sobre os elementos
+
+for (let i = 0; i < sociedade.length; i++) {
+  const elemento = sociedade[i]
+  console.log(elemento + " se encontra na posição " + i)
+}
