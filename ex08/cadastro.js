@@ -1,5 +1,5 @@
 let pick = ""
-let cadas = [{proprietario: "Dayse", quartos: "2", banheiro: "1", garagem: "N"}]
+let cadas = []
 
 
 do {
@@ -13,16 +13,20 @@ switch(pick){
         dados.quartos = ` Quartos: ${prompt(`Quantidade de quartos:`)} ` 
         dados.banheiro = ` Banheiros: ${prompt(`Quantidade de banheiros:`)} `
         dados.garagem = ` Garagem: ${prompt(`Possui garagem?[N/S]`)}`
-
-        cadas.push(dados)
+        confirmacao = confirm(`Tem certeza que deseja salvar esse imóvel? ${dados.proprietario}, ${dados.quartos}, ${dados.banheiro}, ${dados.garagem}`)
+        if(confirmacao) {
+            cadas.push(dados)
+            alert('O imóvel foi salvo com sucesso!')
+        }else {
+            alert('Voltando ao Menu.')
+        }
+        
     break
     case "2":
         for(let i = 0; i < cadas.length; i++) {
-            alert(`\nImóvel ${i+1}:\n${cadas[i].proprietario}, ${cadas[i].quartos}, ${cadas[1].banheiro}, 
-${cadas[1].garagem}`)
+            alert(`\nImóvel ${i+1}:\n${cadas[i].proprietario}, ${cadas[i].quartos}, ${cadas[i].banheiro}, ${cadas[i].garagem}`)
         }
-        alert(`IMOVÉIS SALVOS:\n${mostrar}`)
-        mostrar = ""
+        
     break
     case "3":
         alert(`ENCERRANDO PROGRAMA...`)
