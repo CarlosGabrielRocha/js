@@ -29,4 +29,25 @@ function criarUsuario(nome, email, senha, tipo = "Admin") {
     console.log(usuario)
 }
 
-criarUsuário("Gabriel", "CarlosGabriel123@gmail", "1234")
+//criarUsuário("Gabriel", "CarlosGabriel123@gmail", "1234")
+
+function muitosParametros(nome, telefone, endereco, aniversario, email, senha ) {
+    //....
+}
+
+muitosParametros("Gabriel", "99999", "rua y", "aniversario", "email", "Senha")
+
+function objetoComoParametro(usuario) {
+    //....
+}
+
+const dadosUsuario = {
+    nome: "",
+    telefone: "",
+    email: "",
+    senha: "",
+    endereco: "",
+    aniversario: ""
+}
+
+objetoComoParametro(dadosUsuario)
