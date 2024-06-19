@@ -89,6 +89,10 @@ const personagens = [
   
   console.log(racas)
 
+  const personagensOrdenados = personagens.slice().sort(function (a, b) {
+    return b.nivel - a.nivel
+  })
 
-
+  console.log(personagens)
+  console.log(personagensOrdenados)
 

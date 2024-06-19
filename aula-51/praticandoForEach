@@ -1,0 +1,33 @@
+const tasks = [
+  { id: 1, description: 'Buy groceries', completed: false, priority: 'medium' },
+  { id: 2, description: 'Pay bills', completed: false, priority: 'high' },
+  { id: 3, description: 'Clean house', completed: true, priority: 'low' },
+  { id: 4, description: 'Fix the sink', completed: false, priority: 'high' },
+  { id: 5, description: 'Read a book', completed: true, priority: 'medium' }
+]
+
+function processTasks(tasks) {
+    let finished = 0
+    let noFinished = 0
+    let pending = []
+     tasks.forEach(function(element) {
+        if(element.priority === 'high'){
+            element.completed = true
+        }
+        if(element.completed === true){
+            finished++
+        } else if(element.completed == false) {
+            noFinished++
+            pending.push(element.description)
+        }
+    })
+
+    return {
+        'completedCount': finished,
+        'pendingCount': noFinished,
+        'pendingDescription': pending
+    }
+}
+
+const result = processTasks(tasks)
+console.log(result)

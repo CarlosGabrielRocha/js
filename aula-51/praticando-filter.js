@@ -1,28 +1,24 @@
-const library = [
-    { type: 'book', title: 'The Great Gatsby', author: 'F. Scott Fitzgerald', genre: 'Fiction', year: 1925, rating: 4.7 },
-    { type: 'movie', title: 'Inception', director: 'Christopher Nolan', genre: 'Sci-Fi', year: 2010, rating: 4.8 },
-    { type: 'music', title: 'Bohemian Rhapsody', artist: 'Queen', genre: 'Rock', year: 1975, rating: 4.9 },
-    { type: 'book', title: '1984', author: 'George Orwell', genre: 'Dystopian', year: 1949, rating: 4.6 },
-    { type: 'movie', title: 'The Matrix', director: 'The Wachowskis', genre: 'Sci-Fi', year: 1999, rating: 4.7 },
-    { type: 'music', title: 'Thriller', artist: 'Michael Jackson', genre: 'Pop', year: 1982, rating: 4.8 },
-]
+const transactions = [
+    { id: 1, type: 'income', amount: 500, date: '2024-06-01' },
+    { id: 2, type: 'expense', amount: 150, date: '2024-06-02' },
+    { id: 3, type: 'expense', amount: 90, date: '2024-06-03' },
+    { id: 4, type: 'expense', amount: 200, date: '2024-06-04' },
+    { id: 5, type: 'income', amount: 800, date: '2024-06-05' }
+  ]
 
-function filterLibrary(library, criteria) {
-    const filtrado = library.filter(function(elemento) {
-        return elemento.type === criteria.type &&
-               elemento.genre === criteria.genre &&
-               elemento.year >= criteria.minYear &&
-               elemento.rating >= criteria.minRating
+const startDate = new Date('2024-06-01')
+const endDate = new Date('2024-06-03')
+
+function filterTransactions(transactions, startDate, endDate) {
+    const filtrado = transactions.filter(function(elemento) {
+        let elementDate = new Date(elemento.date)
+        return elemento.type === 'expense' &&
+               elemento.amount > 100 &&
+               elementDate.getTime() >= startDate.getTime() &&
+               elementDate.getTime() <= endDate.getTime()
     })
+
     return filtrado
 }
 
-const criteria = {
-    type: 'movie',
-    genre: 'Sci-Fi',
-    minYear: 2000,
-    minRating: 4.5
-}
-
-console.log(filterLibrary(library, criteria))
-
+console.log(filterTransactions(transactions, startDate, endDate))
