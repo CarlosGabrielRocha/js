@@ -1,20 +1,46 @@
-let nome = new String("Carlossssss Gabriel Rochaaaaaaaaa 2003")
-let email = "carlosgabriel092003@gmail.com"
+let nome = "Gabriel"
+let nome2 = ("Gabriel Rocha") 
+let sobreNome = "Rocha"
+
 console.log(nome)
 
-console.log(nome.search("gabriel"))
+console.log(nome.charAt(0))
 
-console.log(nome.match(/O/ig))
+console.log(nome.charCodeAt(1))
 
-console.log(nome.replace("Carlos","Gabriel"))
+console.log(nome.concat(sobreNome))
 
-console.log(nome.match(/[a-i|0-5]/ig))
+console.log(nome.indexOf("br"))
 
-console.log(nome.match(/\d/ig)) // Números
-console.log(nome.match(/\s/ig)) // Espaços
-console.log(nome.match(/\bC/ig)) // Caracteres
+console.log(nome.lastIndexOf("a"))
 
-// Quantificadores
+console.log(nome.localeCompare(nome2))
 
-console.log(nome.match(/s+/ig))
+console.log(nome.replace("G", "P"))
 
+console.log(nome.slice(1, 5))
+
+let arr_nome = nome.split(" ")
+console.log(arr_nome)
+
+console.log(nome.substring(0, 6))
+
+console.log(nome.toLocaleLowerCase())
+console.log(nome.toLocaleUpperCase())
+
+console.log(nome)
+console.log(nome.valueOf())
+
+let num = 10
+console.log(typeof(num.toString()))
+
+console.log(nome.startsWith("Gabriel"))
+console.log(nome.endsWith("a"))
+
+console.log(nome.includes('Carlos'))
+
+console.log(nome.repeat(4))
+
+console.log(nome.charCodeAt(1))
+
+console.log(String.fromCodePoint(66, 114, 117, 110, 111))
