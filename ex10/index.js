@@ -1,10 +1,31 @@
 const vagas = []
 
+
 function criarVaga() {
+    // Variáveis para teste de data
+    let results = false
+    let regex = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/
+    let dataLimite = ''
+    let tentativas = 0
+
     let nome = prompt(`Digite o nome da VAGA:`)
-    let descricao = prompt(`Decreva informações da VAGA:`)
-    let dataLimite = prompt(`Qual será a data limite para inscrição na VAGA? EX: dd/mm/aaaa`)
+    let descricao = prompt(`Descrição da VAGA:`)
+
+    do {
+        dataLimite = prompt(`Qual será a data limite para inscrição nessa VAGA? EX: dd/mm/aaaa`)
+        results = regex.test(dataLimite)
+        if (results !== true) {
+            alert('Data inválida!')
+            tentativas++
+            alert(tentativas)
+        }
+        if (tentativas > 3) {
+            alert('Voltando ao MENU..')
+        }
+    } while (results !== true || tentativas <= 3)
+
     let confirmacao = confirm(`Tem certeza que deseja adicionar essa VAGA?\n---------------\nNome da Vaga: ${nome}\nDescrição:\n${descricao}\nData Limite: ${dataLimite}`)
+
     if (confirmacao) {
         vagas.push({
             'nome': nome,
