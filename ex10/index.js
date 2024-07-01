@@ -4,7 +4,7 @@ const vagas = []
 
 function validarData(dataLimite) {
     let dataAtual = new Date()
-    dataModificada = dataLimite.replace(/\//g,'-')
+    dataModificada = dataLimite.replace(/\//g, '-')
     dataTeste = new Date(dataModificada)
 
     let regex = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/
@@ -15,7 +15,7 @@ function validarData(dataLimite) {
         alert('[A data informada se encontra em um formato errado!]')
         dataValida = false
         return dataValida
-    } else if(dataTeste.getTime() < dataAtual.getTime()) {
+    } else if (dataTeste.getTime() < dataAtual.getTime()) {
         alert('[A data informada é anterior à data atual.]')
         dataValida = false
         return dataValida
@@ -23,7 +23,7 @@ function validarData(dataLimite) {
         dataValida = true
         return dataValida
     }
- 
+
 }
 
 //Funções ligadas ao menu
@@ -58,14 +58,38 @@ function criarVaga() {
 
 }
 
-// TERMINAR!!!!!!!
-
 function listarVagas() {
-    let lista = vagas.reduce(function(acumulativo, elemento) {
-        acumulativo += `Vaga(${vagas.indexOf(elemento)})\n${elemento.nome}\nNúmero de inscritos:`
+    let lista = vagas.reduce(function (acumulativo, elemento) {
+        return acumulativo += `\nVaga(${vagas.indexOf(elemento)})\n------------\n${elemento.nome}\nNúmero de inscritos:`
     }, '')
-    
+
     alert(lista)
+}
+
+// TERMINAR
+
+function inscreverCandidato() {
+    let nome = prompt('Nome do candidato:')
+    let indiceVaga = parseInt(prompt('Qual é o índice da vaga que você deseja se candidatar?'))
+    let vaga = ''
+
+    for(c = 0;c <= vagas.length; c++) {
+        if (vagas.indexOf(vagas[c]) === indiceVaga) {
+            return `Vaga(${vagas.indexOf(vagaAtual)})\n------------\n${vagaAtual.nome}\nNúmero de inscritos:`
+        }
+    }
+
+    if (vagas[indiceVaga].candidatos) {
+        confirm(`Tem certeza que deseja se candidatar a essa vaga?`)
+        vagas[indiceVaga]['candidatos'].push(nome)
+
+    } else if (vagas[indiceVaga] && vagas[indiceVaga].candidatos === undefined) {
+        vagas[indiceVaga].candidatos = [nome]
+
+    } else {
+        alert('[Essa vaga não existe!]')
+    }
+
 }
 
 //Menu
@@ -87,6 +111,9 @@ function opcoes(opt) {
             break
         case '2':
             criarVaga()
+            break
+        case '4':
+            inscreverCandidato()
             break
         default:
             alert('[OPÇÃO INVÁLIDA]')
