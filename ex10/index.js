@@ -98,6 +98,7 @@ function inscreverCandidato() {
 }
 
 function excluirVaga() {
+    let confirmacao = false
     let voltarMenu = false
     do {
         let indiceVaga = parseInt(prompt('Informe o indice da vaga que será excluída:'))
