@@ -48,7 +48,8 @@ function criarVaga() {
             vagas.push({
                 'nome': nome,
                 'descricao': descricao,
-                'dataLimite': dataLimite
+                'dataLimite': dataLimite,
+                'candidatos': []
             })
             alert('Vaga adicionada com sucesso!')
         } else {
@@ -60,39 +61,68 @@ function criarVaga() {
 
 function listarVagas() {
     let lista = vagas.reduce(function (acumulativo, elemento) {
-        return acumulativo += `\nVaga(${vagas.indexOf(elemento)})\n------------\n${elemento.nome}\nNúmero de inscritos:`
+        return acumulativo += `\nVaga(${vagas.indexOf(elemento)})\n------------\n${elemento.nome}\nNúmero de inscritos: ${elemento['candidatos'].length}`
     }, '')
 
     alert(lista)
 }
 
-// TERMINAR
-
 function inscreverCandidato() {
+    let confirmacao = false
+    let voltarMenu = false
     let nome = prompt('Nome do candidato:')
-    let indiceVaga = parseInt(prompt('Qual é o índice da vaga que você deseja se candidatar?'))
-    let vaga = ''
 
-    for(c = 0;c <= vagas.length; c++) {
-        if (vagas.indexOf(vagas[c]) === indiceVaga) {
-            return `Vaga(${vagas.indexOf(vagaAtual)})\n------------\n${vagaAtual.nome}\nNúmero de inscritos:`
+    do {
+        let indiceVaga = parseInt(prompt('Qual é o índice da vaga que você deseja se candidatar?'))
+
+        for (c = 0; c <= vagas.length - 1; c++) {
+
+            if (vagas.indexOf(vagas[c]) === indiceVaga - 1) {
+                confirmacao = confirm(`Você tem certeza que quer adicionar o candidato ${nome} na vaga:\n${vagas[c].nome}\nNúmero de inscritos: ${vagas[c].candidatos.length}`)
+
+                if (confirmacao) {
+                    vagas[c].candidatos.push(nome)
+                    voltarMenu = true
+                    alert('Inscrição feita com sucesso!')
+                } else {
+                    alert('Voltando ao MENU..')
+                    voltarMenu = true
+                }
+
+            } else if (vagas[indiceVaga] === undefined) {
+                alert('[VAGA INEXISTENTE]')
+            }
         }
-    }
 
-    if (vagas[indiceVaga].candidatos) {
-        confirm(`Tem certeza que deseja se candidatar a essa vaga?`)
-        vagas[indiceVaga]['candidatos'].push(nome)
-
-    } else if (vagas[indiceVaga] && vagas[indiceVaga].candidatos === undefined) {
-        vagas[indiceVaga].candidatos = [nome]
-
-    } else {
-        alert('[Essa vaga não existe!]')
-    }
-
+    } while (voltarMenu === false)
 }
 
-//Menu
+function excluirVaga() {
+    let voltarMenu = false
+    do {
+        let indiceVaga = parseInt(prompt('Informe o indice da vaga que será excluída:'))
+
+        for (c = 0; c <= vagas.length - 1; c++) {
+
+            if (vagas.indexOf(vagas[c]) === indiceVaga - 1) {
+                let confirmacao = confirm(`Você tem certeza que deseja excluir a vaga:\n(${c+1})\n${vagas[c].nome}\nDescrição:${vagas[c].descricao}\nNúmero de inscritos: ${vagas[c].candidatos.length}`)
+
+                if (confirmacao) {
+                    vagas.splice(indiceVaga - 1, 1)
+                    voltarMenu = true
+                    alert('A vaga foi excluída com sucesso!')
+                } else {
+                    voltarMenu = true
+                    alert('Voltando ao MENU..')
+                }
+
+            } else if(vagas[indiceVaga] === undefined) {
+                alert('[VAGA INEXISTENTE]')
+            }
+        }
+
+    } while (voltarMenu === false)
+}
 
 function menu() {
     let opt = prompt(`1. Vagas disponíveis\n2. Criar nova vaga\n3. Vizualizar vaga\n4. Inscrever candidato em vaga\n5. Excluir vaga\n6. Sair `)
@@ -114,6 +144,9 @@ function opcoes(opt) {
             break
         case '4':
             inscreverCandidato()
+            break
+        case '5':
+            excluirVaga()
             break
         default:
             alert('[OPÇÃO INVÁLIDA]')
