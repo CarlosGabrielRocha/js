@@ -6,6 +6,8 @@ function validarData(dataLimite) {
     let dataAtual = new Date()
     dataModificada = dataLimite.replace(/\//g, '-')
     dataTeste = new Date(dataModificada)
+    dataTeste.toLocaleDateString('pt-BR')
+    dataAtual.toLocaleDateString('pt-BR')
 
     let regex = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/
     let validandoData = regex.test(dataLimite)
@@ -15,7 +17,7 @@ function validarData(dataLimite) {
         alert('[A data informada se encontra em um formato errado!]')
         dataValida = false
         return dataValida
-    } else if (dataTeste.getTime() < dataAtual.getTime()) {
+    } else if (dataTeste < dataAtual) {
         alert('[A data informada é anterior à data atual.]')
         dataValida = false
         return dataValida
@@ -61,10 +63,44 @@ function criarVaga() {
 
 function listarVagas() {
     let lista = vagas.reduce(function (acumulativo, elemento) {
-        return acumulativo += `\nVaga(${vagas.indexOf(elemento)})\n------------\n${elemento.nome}\nNúmero de inscritos: ${elemento['candidatos'].length}`
+        return acumulativo + `\nVaga(${vagas.indexOf(elemento)+1})\n------------\n${elemento.nome}\nNúmero de inscritos: ${elemento['candidatos'].length}\n------------\n`
     }, '')
 
-    alert(lista)
+    if (lista.length === 0) {
+        alert('Não há vagas disponíveis no momento.')
+    } else {
+        alert(lista)
+    }
+}
+
+
+function visualizarVaga() {
+    let candidatos = ''
+    let voltarMenu = false
+
+    do {
+        let indiceVaga = parseInt(prompt('Qual é o índice da vaga que você deseja vizualizar?'))
+        indiceVaga--
+
+        let vaga = vagas.filter(function (elemento, indice) {
+            return indice == indiceVaga
+        })
+
+        if (vaga[indiceVaga].candidatos.length !== 0) {
+            candidatos = vaga[indiceVaga].candidatos.reduce(function (acumulativo, elemento) {
+                return acumulativo + `\n- ${elemento}`
+            }, '')
+        }
+
+        if (vaga.length === 0) {
+            alert('[VAGA INEXISTENTE]')
+        } else {
+            alert(`Vaga(${indiceVaga})\n---------------\n${vaga[indiceVaga].nome}\nDescrição:\n${vaga[indiceVaga].descricao}\nData limite: ${vaga[indiceVaga].dataLimite}\nNúmero de candidatos:${vaga[indiceVaga].candidatos.length}\nCandidatos: ${candidatos}`)
+            voltarMenu = true
+        }
+
+    } while (voltarMenu === false)
+
 }
 
 function inscreverCandidato() {
@@ -106,10 +142,10 @@ function excluirVaga() {
         for (c = 0; c <= vagas.length - 1; c++) {
 
             if (vagas.indexOf(vagas[c]) === indiceVaga - 1) {
-                let confirmacao = confirm(`Você tem certeza que deseja excluir a vaga:\n(${c+1})\n${vagas[c].nome}\nDescrição:${vagas[c].descricao}\nNúmero de inscritos: ${vagas[c].candidatos.length}`)
+                confirmacao = confirm(`Você tem certeza que deseja excluir a vaga:\n(${c + 1})\n${vagas[c].nome}\nDescrição:\n${vagas[c].descricao}\nNúmero de inscritos: ${vagas[c].candidatos.length}`)
 
                 if (confirmacao) {
-                    vagas.splice(indiceVaga - 1, 1)
+                    vagas.splice(indiceVaga - 2, 1)
                     voltarMenu = true
                     alert('A vaga foi excluída com sucesso!')
                 } else {
@@ -117,7 +153,7 @@ function excluirVaga() {
                     alert('Voltando ao MENU..')
                 }
 
-            } else if(vagas[indiceVaga] === undefined) {
+            } else if (vagas[indiceVaga] === undefined) {
                 alert('[VAGA INEXISTENTE]')
             }
         }
@@ -142,6 +178,9 @@ function opcoes(opt) {
             break
         case '2':
             criarVaga()
+            break
+        case '3':
+            visualizarVaga()
             break
         case '4':
             inscreverCandidato()
