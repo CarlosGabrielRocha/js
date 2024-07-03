@@ -3,36 +3,26 @@ const vagas = []
 //Funções de Validação
 
 function validarData(dataLimite) {
-    let dataAtual = new Date()
-    dataModificada = dataLimite.replace(/\//g, '-')
-    dataTeste = new Date(dataModificada)
-    dataTeste.toLocaleDateString('pt-BR')
-    dataAtual.toLocaleDateString('pt-BR')
 
     let regex = /^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$/
     let validandoData = regex.test(dataLimite)
-    let dataValida
+    let dataValida = false
 
     if (validandoData !== true) {
         alert('[A data informada se encontra em um formato errado!]')
-        dataValida = false
-        return dataValida
-    } else if (dataTeste < dataAtual) {
-        alert('[A data informada é anterior à data atual.]')
         dataValida = false
         return dataValida
     } else {
         dataValida = true
         return dataValida
     }
-
 }
 
 //Funções ligadas ao menu
 
 function criarVaga() {
 
-    let nome = prompt(`Digite o nome da VAGA:`)
+    let nome = prompt(`Digite o título da VAGA:`)
     let descricao = prompt(`Descrição da VAGA:`)
 
     let dataValida = 'false'
@@ -44,7 +34,7 @@ function criarVaga() {
     } while (dataValida !== true)
 
     if (dataValida) {
-        let confirmacao = confirm(`Tem certeza que deseja adicionar essa VAGA?\n---------------\nNome da Vaga: ${nome}\nDescrição:\n${descricao}\nData Limite: ${dataLimite}`)
+        let confirmacao = confirm(`Tem certeza que deseja adicionar essa VAGA?\n---------------\nTítulo da Vaga: ${nome}\nDescrição:\n${descricao}\nData Limite: ${dataLimite}`)
 
         if (confirmacao) {
             vagas.push({
@@ -94,9 +84,15 @@ function visualizarVaga() {
 
         if (vaga.length === 0) {
             alert('[VAGA INEXISTENTE]')
+
         } else {
-            alert(`Vaga(${indiceVaga})\n---------------\n${vaga[indiceVaga].nome}\nDescrição:\n${vaga[indiceVaga].descricao}\nData limite: ${vaga[indiceVaga].dataLimite}\nNúmero de candidatos:${vaga[indiceVaga].candidatos.length}\nCandidatos: ${candidatos}`)
-            voltarMenu = true
+            if(candidatos.length === 0) {
+                alert(`Vaga(${indiceVaga+1})\n---------------\n${vaga[indiceVaga].nome}\nDescrição:\n${vaga[indiceVaga].descricao}\nData limite: ${vaga[indiceVaga].dataLimite}\nNúmero de candidatos: ${vaga[indiceVaga].candidatos.length}`)
+                voltarMenu = true
+            } else {
+                alert(`Vaga(${indiceVaga+1})\n---------------\n${vaga[indiceVaga].nome}\nDescrição:\n${vaga[indiceVaga].descricao}\nData limite: ${vaga[indiceVaga].dataLimite}\nNúmero de candidatos: ${vaga[indiceVaga].candidatos.length}\nCandidatos: ${candidatos}`)
+                voltarMenu = true
+            }
         }
 
     } while (voltarMenu === false)
@@ -107,7 +103,6 @@ function inscreverCandidato() {
     let confirmacao = false
     let voltarMenu = false
     let nome = prompt('Nome do candidato:')
-
     do {
         let indiceVaga = parseInt(prompt('Qual é o índice da vaga que você deseja se candidatar?'))
 
@@ -119,7 +114,7 @@ function inscreverCandidato() {
                 if (confirmacao) {
                     vagas[c].candidatos.push(nome)
                     voltarMenu = true
-                    alert('Inscrição feita com sucesso!')
+                    alert('Inscrição realizada com sucesso!')
                 } else {
                     alert('Voltando ao MENU..')
                     voltarMenu = true
