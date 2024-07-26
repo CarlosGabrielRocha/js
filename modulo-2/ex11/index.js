@@ -1,16 +1,3 @@
-const players = []
-
-function currentlyPlayers() {
-    const list = document.getElementById('players')
-    const ul = document.createElement('ul')
-
-    // terminar
-
-    players.forEach(function(elemento) {
-
-        ul.appendChild(document.createElement(li))
-    })
-}
 
 function addPlayer() {
 
@@ -79,13 +66,40 @@ function escalar(position, pName, shirt) {
    const add = confirm(`Tem certeza que deseja escalar o jogador com as informações:\nPosição do jogador: ${position}\nNome do jogador: ${pName}\nCamisa do jogador: ${shirt}`)
 
    if(add === true) {
-        players.push({
-            jogador: pName,
-            posicao: position,
-            camisa: shirt
-        })
-        alert('Jogador adicionado com sucesso!')
+
+    const list = document.getElementById('players')
+    const ul = document.createElement('ul')
+    ul.id = 'escalados'
+    const liPosition = document.createElement('li')
+    const liName = document.createElement('li')
+    const liShirt = document.createElement('li')
+
+    const inputPosition = document.getElementById('posicao')
+    const inputName = document.getElementById('nome')
+    const inputShirt = document.getElementById('camisa')
+
+    liName.innerText = (`Nome do jogador: ${inputName.value}`)
+    liPosition.innerText = (`Posição do jogador: ${inputPosition.value}`)
+    liShirt.innerText = (`Camisa do jogador: ${inputShirt.value}`)
+    ul.append(liName, liPosition, liShirt)
+    list.appendChild(ul)
+
+    alert('Jogador adicionado com sucesso!')
+
    } 
 }
 
-currentlyPlayers()
+// terminar
+
+function removePlayer() {
+    const ul = querySelectorAll('ul#escalados')
+    const li = ul.querySelectorAll('li')
+
+    const playerToRemove = prompt('Digite o número da camisa do jogador que você deseja remover:')
+
+    li.forEach(function(elemento) {
+        if(elemento.value === playerToRemove) {
+            
+        }
+    })
+}
