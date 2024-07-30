@@ -72,7 +72,20 @@ function addPlayer() {
 // Terminar
 
 function escalar(position, pName, shirt) {
-    const add = confirm(`Tem certeza que deseja escalar o jogador com as informações:\nPosição do jogador: ${position}\nNome do jogador: ${pName}\nCamisa do jogador: ${shirt}`)
+    
+    let add = false
+    let exist = false
+
+    playersNow.forEach(function(elemento) {
+        if (elemento.camisa == shirt || elemento.posicao == position) {
+            alert('Não é permitido jogadores iguais em uma partida.')
+            exist = true
+        } 
+    })
+
+    if(exist != true) {
+        add = confirm(`Tem certeza que deseja escalar o jogador com as informações:\nPosição do jogador: ${position}\nNome do jogador: ${pName}\nCamisa do jogador: ${shirt}`)
+    }
 
     if (add === true) {
         playersNow.push({
@@ -87,6 +100,8 @@ function escalar(position, pName, shirt) {
 
 }
 
+// Listar jogadores na página
+
 function list() {
 
     const list = document.getElementById('players')
@@ -94,9 +109,9 @@ function list() {
 
     const restart = list.getElementsByTagName('ul')
 
-        for (let c = 0; c <= restart.length - 1; c++) {
-            restart[c].remove()
-        }
+    for (let c = 0; c <= restart.length - 1; c++) {
+        restart[c].remove()
+    }
 
     playersNow.forEach(function (elemento) {
         const liPosition = document.createElement('li')
@@ -112,13 +127,32 @@ function list() {
 
 }
 
-function removePlayer() {
+//Remover jogador
 
+function removePlayer() {
+    let exist = 0
     const playerToRemove = prompt(`Informe o número da camisa do jogador que será removido: `)
 
     playersNow = playersNow.filter(function (elemento) {
-        return elemento.camisa !== playerToRemove
+        if (elemento.camisa === playerToRemove) {
+            exist++
+            const remove = confirm(`Tem certeza que deseja remover o jogador com as informações:\nPosição do jogador: ${elemento.posicao}\nNome do jogador: ${elemento.nome}\nCamisa do jogador: ${elemento.camisa}`)
+
+            if (remove === true) {
+                alert('Jogador removido com sucesso!')
+                return false
+            } else {
+                return true
+            }
+
+        } else {
+            return true
+        }
     })
+
+    if(exist == 0) {
+        alert('O jogador não existe.')
+    }
 
     list()
 
