@@ -1,5 +1,6 @@
 const devs = []
 let devsUpdate
+let divCount = 0
 
 const button = document.querySelector('button[name = "add-tecnology"]')
 
@@ -7,6 +8,7 @@ button.addEventListener('click', addtecnology)
 
 function addtecnology(event) {
     event.preventDefault()
+    divCount++
 
     const form = event.currentTarget.parentNode
     const div = document.createElement('div')
@@ -28,11 +30,11 @@ function addtecnology(event) {
     legend.innerText = 'Tempo de experiência'
 
     const experienceTime0_2 = document.createElement('input')
-    experienceTime0_2.checked = true
     const experienceTime3_4 = document.createElement('input')
     const experienceTime5 = document.createElement('input')
 
     experienceTime0_2.type = 'radio'
+    experienceTime0_2.checked = true
     experienceTime3_4.type = 'radio'
     experienceTime5.type = 'radio'
 
@@ -40,9 +42,9 @@ function addtecnology(event) {
     experienceTime3_4.value = '3-4 anos'
     experienceTime5.value = 'mais de 5 anos'
 
-    experienceTime0_2.name = 'experience'
-    experienceTime3_4.name = 'experience'
-    experienceTime5.name = 'experience'
+    experienceTime0_2.name = `experience${divCount}`
+    experienceTime3_4.name = `experience${divCount}`
+    experienceTime5.name = `experience${divCount}`
 
     experienceTime0_2.id = 'experience02'
     experienceTime3_4.id = 'experience34'
@@ -106,12 +108,11 @@ function registerDev(event) {
     let filled = false
     let confirmation = false
     const div = event.currentTarget.parentNode
-
     const devName = document.querySelector('input[name = "name"]').value
     const tecnologyName = div.querySelector('input[name = "tecnologyName"]').value
-    const experienceTime = div.querySelector('input[name = "experience"]:checked').value
+    const experienceTime = div.querySelector('input[type = "radio"]:checked').value
 
-    if(devName == '' || tecnologyName == '') {
+    if (devName == '' || tecnologyName == '') {
         alert('Todos os campos precisam estar preenchidos!')
     } else {
         filled = true
