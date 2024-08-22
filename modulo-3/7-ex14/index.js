@@ -19,7 +19,7 @@ const weightedMean = (...pairs) => {
 
 }
 
-console.log(weightedMean({ n: 7, p: 2 }, { n: 9, p: 5 }, { n: 3, p: 1 }))
+console.log(weightedMean({ n: 9, p: 3 }, { n: 7, p: 1 }, { n: 10, p: 1 }))
 
 const median = (...nums) => {
 
@@ -52,7 +52,7 @@ const mode = (...nums) => {
     }, {})
 
     const pairs = Object.entries(numQuantity)
-    console.log(pairs)
+    
     pairs.forEach(pair => {
         if (pair[1] > num) {
             num = pair[0]
