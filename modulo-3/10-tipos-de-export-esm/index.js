@@ -1,0 +1,10 @@
+
+import { inline } from "./inline.js"
+import defaultInline from "./inline.js"
+import exportDefault, { group, group2 } from "./non-inline.js"
+
+inline()
+defaultInline()
+
+group()
+exportDefault()
